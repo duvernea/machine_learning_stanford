@@ -17,11 +17,8 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
-
-
-
-
-
+    hypothesis_difference=(X*theta-y);  % 2xm matrix
+    theta= theta - alpha/m * (X' * hypothesis_difference);
 
     % ============================================================
 
