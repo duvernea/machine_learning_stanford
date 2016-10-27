@@ -19,7 +19,8 @@ for iter = 1:num_iters
 
 
 
-
+    hypothesis_difference=(X*theta-y);  % 2xm matrix
+    theta= theta - alpha/m * (X' * hypothesis_difference);
 
 
 
