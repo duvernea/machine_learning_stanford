@@ -25,6 +25,11 @@ sigma = zeros(1, size(X, 2));
 %
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
+% this is the index of the last column. The number of features is this index - 1 
+num_features_index = size(X,2);
+mu = mean(X);
+sigma = std(X);
+X_norm = (X(:,1:num_features_index)-mu(:,1:num_features_index))./sigma(:,1:num_features_index);
 
 
 
