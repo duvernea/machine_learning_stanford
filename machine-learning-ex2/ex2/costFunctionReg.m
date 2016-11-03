@@ -18,7 +18,18 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 
 
-
+% compute hypothesis
+h = sigmoid(X*theta);
+% compute number of training set samples
+m=size (X,1);
+% compute regularization
+%theta, without theta0
+thetasize = size(theta,1);
+reg = lambda/(2*m) * sum(theta(2:thetasize).^2);
+% compute cost function
+J = 1/m.*(-y'* log (h) - (1 - y)'*log(1-h))+reg
+% gradient function
+grad = 1/m.*X'*(h-y);
 
 
 
