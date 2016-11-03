@@ -19,10 +19,14 @@ grad = zeros(size(theta));
 %
 % Note: grad should have the same dimensions as theta
 %
-
-
-
-
+% compute hypothesis
+h = sigmoid(X*theta)
+% compute number of training set samples
+m=size (X,1)
+% compute cost function
+J = 1/m.*(-y'* log (h) - (1 - y)'*log(1-h))
+% gradient function
+grad = 1/m.*X'*(h-y)
 
 
 
