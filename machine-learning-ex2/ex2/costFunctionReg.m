@@ -27,9 +27,10 @@ m=size (X,1);
 thetasize = size(theta,1);
 reg = lambda/(2*m) * sum(theta(2:thetasize).^2);
 % compute cost function
-J = 1/m.*(-y'* log (h) - (1 - y)'*log(1-h))+reg
+J = 1/m.*(-y'* log (h) - (1 - y)'*log(1-h))+reg;
 % gradient function
-grad = 1/m.*X'*(h-y);
+reg_gradient_term = [0; lambda/m*(theta(2:thetasize))];
+grad = 1/m.*X'*(h-y)+reg_gradient_term;
 
 
 
