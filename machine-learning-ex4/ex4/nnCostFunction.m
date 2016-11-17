@@ -61,6 +61,34 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
+%%%%%%%%%%%%%% PART 1 **********
+col_ones = [ones(size(X,1),1)];
+% Add ones to first column of X
+X=[col_ones, X]; 
+
+%hidden layer
+z2 = (Theta1 * X')';
+a2 = sigmoid(z2);
+col_ones_hidden = [ones(size(a2,1),1)];
+a2 = [col_ones_hidden, a2];
+%output layer
+z3 = (Theta2* a2')';
+a3 = sigmoid(z3);
+
+% h = hypothesis output based on Theta
+[max_values, h] = max(a3, [], 2);
+
+% Note y==10 is the representation for y equal to 0
+
+cost = 0;
+for result=1:num_labels
+	y_temp = y==result;
+	test = -y_temp'*log(a3(:,result))-(1-y_temp)'*log(1-a3(:,result));
+	cost += test;
+end
+
+J = 1/m*cost;
+
 
 
 
