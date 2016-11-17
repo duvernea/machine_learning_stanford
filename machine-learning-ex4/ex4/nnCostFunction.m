@@ -89,24 +89,14 @@ end
 
 J = 1/m*cost;
 
+% remove first column from Theta 1 and Theta 2
+Theta1 = Theta1(:,2:size(Theta1,2));
+Theta2 = Theta2(:,2:size(Theta2,2));
 
 
+Jreg = lambda/(2*m)*(sum((Theta1.^2)(:))+sum((Theta2.^2)(:)));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+J = J+Jreg;
 
 % -------------------------------------------------------------
 
