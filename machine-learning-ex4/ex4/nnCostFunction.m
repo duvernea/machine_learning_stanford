@@ -90,13 +90,46 @@ end
 J = 1/m*cost;
 
 % remove first column from Theta 1 and Theta 2
-Theta1 = Theta1(:,2:size(Theta1,2));
-Theta2 = Theta2(:,2:size(Theta2,2));
+Theta1_onesremoved = Theta1(:,2:size(Theta1,2));
+Theta2_onesremoved = Theta2(:,2:size(Theta2,2));
 
+Jreg = lambda/(2*m)*(sum((Theta1_onesremoved.^2)(:))+sum((Theta2_onesremoved.^2)(:)));
 
-Jreg = lambda/(2*m)*(sum((Theta1.^2)(:))+sum((Theta2.^2)(:)));
-
+% Normalized Cost
 J = J+Jreg;
+
+%%%%%%%%%%%%%% PART 2 **********
+
+for t=1:m
+	% Take one training example
+	% Add ones to first column of X
+	train_example=X(t,:); 
+
+	%hidden layer
+	z2 = (Theta1 * train_example')';
+	a2 = sigmoid(z2);
+	a2 = [1, a2];
+	%output layer
+	z3 = (Theta2* a2')';
+	a3 = sigmoid(z3);
+
+	temp = zeros(1,num_labels);
+	temp (y(t)) = 1;
+
+	delta3 = a3-temp;
+	gprime = a2.*(1-a2);
+	delta2= (delta3*Theta2).*gprime;
+
+	delta2 = delta2(2:end);
+
+	Theta2_grad += delta3'*a2;
+	Theta1_grad += delta2'*train_example;
+
+end
+
+Theta1_grad /= m;
+Theta2_grad /= m;
+
 
 % -------------------------------------------------------------
 
@@ -104,6 +137,5 @@ J = J+Jreg;
 
 % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
-
 
 end
