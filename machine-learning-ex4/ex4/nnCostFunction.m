@@ -130,6 +130,17 @@ end
 Theta1_grad /= m;
 Theta2_grad /= m;
 
+% regularization
+% Compute regularization terms
+Theta1_reg = Theta1;
+Theta1_reg(:,1) = 0;
+Theta1_reg *= lambda/m;
+Theta2_reg = Theta2;
+Theta2_reg(:,1) = 0;
+Theta2_reg *= lambda/m;
+Theta1_grad += Theta1_reg;
+Theta2_grad += Theta2_reg;
+
 
 % -------------------------------------------------------------
 
