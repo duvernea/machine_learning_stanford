@@ -24,6 +24,13 @@ J= 1/(2*m).*sum((X*theta-y).^2);
 % Add regularization term to cost function
 J+= lambda/(2*m).*sum(theta(2:end).^2);
 
+% Zero out regularization on theta0
+theta_reg = theta;
+theta_reg(1) = 0;
+
+% Compute gradient
+grad = 1/m*(X'*(X*theta-y) + lambda*theta_reg);
+
 
 
 
