@@ -21,6 +21,23 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+num_examples = size(X,1);
+for i=1:num_examples
+	distance = 0;
+	for j=1:K
+		if (j==1)
+			distance = sum((X(i,:)-centroids(j,:)).^2);
+			idx(i) = 1;
+		else
+			temp_distance = sum((X(i,:)-centroids(j,:)).^2);
+			if (temp_distance < distance)
+				distance = temp_distance;
+				idx(i) = j;
+			end
+		end
+	end
+end
+
 
 
 
