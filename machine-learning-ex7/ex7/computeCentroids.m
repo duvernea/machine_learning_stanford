@@ -26,12 +26,11 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
-
-
-
-
-
+for i=1:K
+	centroid_bool = (idx == i);
+	num_points = sum(centroid_bool)
+	centroids(i,:) = (X'*centroid_bool)./num_points;
+end
 
 % =============================================================
 
